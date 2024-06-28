@@ -1,0 +1,15 @@
+{
+  "name": "buddheads-airdrops",
+  "version": "1.0.0",
+  "description": "Script collection for gather info about Buddheads and future airdrops",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "atmon3r",
+  "license": "ISC",
+  "dependencies": {
+    "bech32": "^2.0.0"
+  }
+}
