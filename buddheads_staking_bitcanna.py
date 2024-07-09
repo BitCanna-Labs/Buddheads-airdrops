@@ -39,9 +39,9 @@ for entry in unique_data:
             total_non_zero_list.append(bitcanna_address)
 
 # Imprimir los resultados
-print("Total = 0:")
+print(f"Total = 0: {len(total_zero_list)} registros")
 print(total_zero_list)
-print("\nTotal > 0:")
+print(f"\nTotal > 0: {len(total_non_zero_list)} registros")
 print(total_non_zero_list)
 
 # Guardar los resultados en ficheros JSON
