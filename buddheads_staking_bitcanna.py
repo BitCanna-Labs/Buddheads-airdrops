@@ -4,19 +4,19 @@ import json
 import requests
 from collections import defaultdict
 
-# Cargar el fichero JSON
+# Load the JSON file
 with open('converted-address.json', 'r') as file:
     data = json.load(file)
 
-# Eliminar duplicados basándonos en el campo "bitcanna"
+# Delete duplicates based on field "bitcanna"
 unique_data = {entry['bitcanna']: entry for entry in data}.values()
 
-# Listas para almacenar los resultados
+# List where to store the results
 total_zero_list = []
 total_non_zero_list = []
 
-# Función para obtener el total de delegaciones
-def obtener_total_delegaciones(bitcanna_address):
+# Get the total of delegations by address
+def get_total_delegations(bitcanna_address):
     url = f"https://lcd.bitcanna.io/cosmos/staking/v1beta1/delegations/{bitcanna_address}"
     response = requests.get(url)
     print(f"Checking {bitcanna_address}")
@@ -25,26 +25,26 @@ def obtener_total_delegaciones(bitcanna_address):
         total = int(json_response['pagination']['total'])
         return total
     else:
-        print(f"Error al obtener datos para {bitcanna_address}: {response.status_code}")
+        print(f"Error getting data for address {bitcanna_address}: {response.status_code}")
         return None
 
-# Iterar sobre los datos únicos y obtener el total de delegaciones
+# Iterate over the curated list to get the total of delegations
 for entry in unique_data:
     bitcanna_address = entry['bitcanna']
-    total = obtener_total_delegaciones(bitcanna_address)
+    total = get_total_delegations(bitcanna_address)
     if total is not None:
         if total == 0:
             total_zero_list.append(bitcanna_address)
         else:
             total_non_zero_list.append(bitcanna_address)
 
-# Imprimir los resultados
-print(f"Total = 0: {len(total_zero_list)} registros")
+# Print results
+print(f"Total = 0: {len(total_zero_list)} addresses")
 print(total_zero_list)
-print(f"\nTotal > 0: {len(total_non_zero_list)} registros")
+print(f"\nTotal > 0: {len(total_non_zero_list)} addresses")
 print(total_non_zero_list)
 
-# Guardar los resultados en ficheros JSON
+# Store results in a JSON file
 with open('total_zero_list.json', 'w') as file:
     json.dump(total_zero_list, file)
 
