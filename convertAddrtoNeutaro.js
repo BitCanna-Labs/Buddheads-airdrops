@@ -8,7 +8,7 @@ function processFile(inputFile, outputFile) {
   for (const type of tokensOwner) {
     const decode = bech32.decode(type.owner);
     const neutaroAddr = bech32.encode('neutaro', decode.words);
-    const starAddr = bech32.encode('star', decode.words);
+    const starAddr = bech32.encode('stars', decode.words);
 
     finalOutput.push({
       "bitcanna": type.owner,

@@ -17,7 +17,7 @@ def process_file(input_file, output_file):
             continue  # Skip addresses that cannot be converted
 
         neutaro_addr = bech32_encode('neutaro', convertbits(converted_data, 8, 5, True))
-        star_addr = bech32_encode('star', convertbits(converted_data, 8, 5, True))
+        star_addr = bech32_encode('stars', convertbits(converted_data, 8, 5, True))
 
         final_output.append({
             "bitcanna": type['owner'],
