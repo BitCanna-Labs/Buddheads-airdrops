@@ -34,9 +34,13 @@ for entry in unique_data:
     total = get_total_delegations(bitcanna_address)
     if total is not None:
         if total == 0:
-            total_zero_list.append(bitcanna_address)
+            total_zero_list.append({
+                'owner': bitcanna_address
+            })
         else:
-            total_non_zero_list.append(bitcanna_address)
+            total_non_zero_list.append({
+                'owner': bitcanna_address
+            })
 
 # Print results
 print(f"Total = 0: {len(total_zero_list)} addresses")
@@ -45,8 +49,8 @@ print(f"\nTotal > 0: {len(total_non_zero_list)} addresses")
 print(total_non_zero_list)
 
 # Store results in a JSON file
-with open('total_zero_list.json', 'w') as file:
-    json.dump(total_zero_list, file)
+with open('temporal_nostakers_list.json', 'w') as file:
+    json.dump(total_zero_list, file, indent=2)
 
-with open('total_non_zero_list.json', 'w') as file:
-    json.dump(total_non_zero_list, file)
+with open('temporal_stakers_list.json', 'w') as file:
+    json.dump(total_non_zero_list, file, indent=2)
